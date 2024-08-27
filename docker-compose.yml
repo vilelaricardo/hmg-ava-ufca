@@ -3,7 +3,7 @@ services:
     build: .
 #    image: projetospdiufca/moodle:latest
     ports:
-      - "8080:80"
+      - "80:80"
     volumes:
       - ./moodledata:/var/www/html/moodledata
     depends_on:
