@@ -1,0 +1,30 @@
+services:
+  web:
+    build: .
+#    image: projetospdiufca/moodle:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./moodledata:/var/www/html/moodledata
+    depends_on:
+      - db
+    environment:
+      - MOODLE_DOCKER_DBTYPE=pgsql
+      - MOODLE_DOCKER_DBNAME=ava_ufca
+      - MOODLE_DOCKER_DBUSER=moodle
+      - MOODLE_DOCKER_DBPASS=ricardo123
+      - MOODLE_DOCKER_DBHOST=db
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=ava_ufca
+      - POSTGRES_USER=moodle
+      - POSTGRES_PASSWORD=ricardo123
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  db_data:
